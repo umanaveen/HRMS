@@ -1,0 +1,22 @@
+0- recruiter selector
+1- recruiter waiting
+2 - candidate form ()
+3- recruiter reject
+4 - techniacal team select - (update recruiter details & commands -4 status)
+5 - techniacal team reject
+6 - techniacal team waiting
+7 - md selected
+8 - md waiting list
+9 - md rejected
+10 - ctc approval
+13 - Employee Create
+
+
+TRUNCATE TABLE `candidate_form_details`;
+TRUNCATE TABLE `candicate_results`;
+TRUNCATE TABLE `ctc_approval_table`;
+TRUNCATE TABLE `recruiter_details`;
+TRUNCATE TABLE `recruiter_commands`;
+TRUNCATE TABLE `technical_team_details`;
+TRUNCATE TABLE `technical_team_commands`;
+TRUNCATE TABLE `md_commands`;

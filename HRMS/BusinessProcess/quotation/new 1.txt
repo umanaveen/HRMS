@@ -1,0 +1,46 @@
+     //Increment Variables
+            var items = $('#items');
+            var i = $('#items td').size() + 1;
+            var mileage = $('#mileage');
+            var j = $('#mileage td').size() + 1;
+
+            //Append Table Rows
+            $('#addItem').on('click', function() {
+                    $('<tr><td>&nbsp;<label for="date"><input type="text" id="date" size="10" name="date_' + i +'" value="" placeholder="mm/dd/yyyy" /></label></td>' +
+                      '<td>&nbsp;<label for="desc"><input type="text" id="desc" size="30" name="desc_' + i +'" /></label></td>' +
+                      '<td>&nbsp;$<label for="entmt"><input type="text" id="sum" size="10" name="entmt_' + i +'" placeholder="0.00" /></label></td>' +
+                      '<td>&nbsp;$<label for="meals"><input type="text" id="sum" size="10" name="meals_' + i +'" placeholder="0.00" /></label></td>' +
+                      '<td>&nbsp;$<label for="other"><input type="text" id="sum" size="10" name="other_' + i +'" placeholder="0.00" /></label></td>' +
+                      '<td>&nbsp;$<label for="travel"><input type="text" id="sum" size="10" name="travel_' + i +'" placeholder="0.00" /></label></td>' +
+                      '<td>&nbsp;$<label for="lodging"><input type="text" id="sum" size="10" name="lodging_' + i +'" placeholder="0.00" /></label></td>' +
+                      '<td>&nbsp;$<label for="hst"><input type="text" id="sum" size="10" name="hst_' + i +'" placeholder="0.00" /></label></td>' +
+                      '<td>&nbsp;<a href="#" id="remItem">Remove</a></td></tr>').appendTo(items);
+                    i++;
+                    return false;
+            });
+
+            $('#addMileage').on('click', function() {
+                    $('<tr><td>&nbsp;<label for="mdate"><input type="text" id="mdate" size="10" name="mdate' + j +'" value="" placeholder="mm/dd/yyyy" /></label></td>' +
+                      '<td>&nbsp;<label for="mlocation"><input type="text" id="mlocation" size="30" name="mlocation' + j +'" value="" placeholder="" /></label></td>' +
+                      '<td>&nbsp;<label for="km"><input type="text" id="km" size="10" name="km' + j +'" value="" placeholder="" />KM</label></td>' +
+                      '<td>&nbsp;<a href="#" id="remMileage">Remove</a></td></tr>').appendTo(mileage);
+                    j++;
+                    return false;
+            });
+
+
+            //Remove Buttons
+            $('body').on('click', '#remItem', function() { 
+                    if( i > 2 ) {
+                            $(this).parents('tr').remove();
+                            i--;
+                    }
+                    return false;
+            });
+            $('body').on('click', '#remMileage', function() { 
+                if( j > 2 ) {
+                        $(this).parents('tr').remove();
+                        j--;
+                }
+                return false;
+             });

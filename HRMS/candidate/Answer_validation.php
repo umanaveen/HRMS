@@ -1,0 +1,23 @@
+<?php
+//echo "<pre>";print_r($_GET);exit();
+
+require '../../connect.php';
+$qn_count=$_REQUEST['qn_count'];
+for($i=1;$i<=$qn_count;$i++)
+{
+	
+	    $qn_id=$_GET['qn_id'];
+	    $session_id=$_GET['candidateid'];
+		$question=$_GET['question_value_'.$i];
+		$answer=$_GET['answer_value_'.$i];
+		$qn_section=$_GET['section_val_'.$i];
+		$status='30';
+
+$sql=$con->query("insert into candicate_results(qn_name_id,section_id,ueser_id,question,answer) values('$qn_id','$qn_section','$session_id','$question','$answer')");
+//echo "insert into candicate_results(qn_name_id,ueser_id,question,answer) values('$qn_id','$session_id','$question','$answer')";
+$upd=$con->query("update candidate_form_details set status='$status' where id='$session_id'");
+$upd1=$con->query("update candidate_round_details set status=2 where candid_id='$session_id' and status=1");
+
+}
+exit();
+?>
