@@ -15,8 +15,6 @@ echo $api;
 <div class="table-responsive" id="form_view">
 </div>
 </div>
-
-
 <script>
 function show_form()
 {
