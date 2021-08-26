@@ -16,27 +16,41 @@ $row = $stmt->fetch();
               <center><h3 class="card-title"><b>Po Details </b></h3></center>
 			<a onclick="return back()" style="float: right;" data-toggle="modal" class="btn btn-danger"></i>Back</a>
               </div>
-			  <br>
-			  <br>
-			  <br>
-              <!-- /.card-header -->
-              <!-- form start -->
+			  
+             
    <div class="form-group">  
                      <form name="add_name" id="add_name" enctype="multipart/form-data">  
 					  
   <div class="card-body">
-                                <h5 class="card-title mb-0"> Image</h5>
-								<input type="hidden" class="form-control" id="get_id" name="get_id" value="<?php echo  $row['enquiry_id']; ?>">
-								<hr>
-                                <div class="form-group mt-3">
-                                   <input type="file" name="uploadfile"  value=""/>
-									
-                                  
-                                </div> 
-                               
+                                
+								<div class="form-group row">
+                    <label for="inputdob" class="col-sm-2 col-form-label">Client Company_name</label>
+					
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" name="Company_name" id="Company_name" value="<?php echo  $row['Company_name'];?>"readonly>
+                    </div>
+                  </div>
+                          <div class="form-group row">
+                    <label for="inputdob" class="col-sm-2 col-form-label">Client Name</label>
+					
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" name="clinet_name" id="clinet_name" value="<?php echo  $row['Client'];?>"readonly>
+                    </div>
+                  </div>     
+				   <div class="form-group row">
+                    <label for="inputdob" class="col-sm-2 col-form-label">Po Upload</label>
+					
+                    <div class="col-sm-4">
+                      <input type="hidden" class="form-control" id="get_id" name="get_id" value="<?php echo  $row['enquiry_id']; ?>">
+					   <input type="file" name="uploadfile"  value=""/>
+                    </div>
+                  </div>   
                             </div>
-						 
-								  <input type="submit" name="submit" id="submit" style="float: right;" class="btn btn-info" value="Submit" />  
+						
+                                
+                               
+                            
+								  <input type="submit" name="submit" id="submit" style="float: left;" class="btn btn-info" value="Submit" />  
 								
                      </form>  
                 </div>  
