@@ -33,6 +33,13 @@ class voucher_process
 		$sth = $this->conn->prepare($qry);
 		$sth->execute();
 		//print_r($sth->errorInfo());
+		
+		return $last_id = $this->conn->lastInsertId();
+		
+
+		/* $stmt = $db->prepare("...");
+		$stmt->execute();
+		$id = $db->lastInsertId(); */
 	}
 	
 	public function voucher_details($ledgers_code,$ledgers_amount,$ledgers_type)
@@ -98,23 +105,5 @@ class voucher_process
 				}
 			}
 		}
-	}
-	
-	public function account_entry_insert($v_code)
-	{
-		echo $voucher_code = $v_code;	
-		
-		echo "select * from accounts_voucher where code='$voucher_code'";
-
-		$voucher_sql  = $this->conn->query("select * from accounts_voucher where code='$voucher_code'");		
-		$voucher_detail = $voucher_sql->fetch(PDO::FETCH_ASSOC);
-		echo $date=$voucher_detail['date'];
-		$category_code=$voucher_detail['voucher_category_code'];
-		$purpose_code=$voucher_detail['voucher_purpose_code'];
-		$total_amount=$voucher_detail['amount'];
-		$reference_no=$voucher_detail['reference_no'];
-		echo $reference_voucher=$voucher_detail['reference_voucher'];
-		
-		
 	}
 }
