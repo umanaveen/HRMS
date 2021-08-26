@@ -51,34 +51,21 @@ for($i=0;$i<$length;$i++)
 	<?php
 	}
 	
-	if($v_code[$i]=='CAT-006') // Check the Category Its Debit Voucher 
-	{
-	?>
-	<input type="button" name="vouc_category_code" class="btn btn-primary btn-sm" id="<?php echo $v_code[$i]; ?>" 
-	value="<?php echo 'Sundry Creditor Voucher';?>" onclick="cash_vocher(this.id)"/>
-	<?php
-	}
 	
-	if($v_code[$i]=='CAT-007') // Check the Category Its Debit Voucher 
-	{
-	?>
-	<input type="button" name="vouc_category_code" class="btn btn-primary btn-sm" id="<?php echo $v_code[$i]; ?>" 
-	value="<?php echo 'Sundry Debtor Voucher';?>" onclick="cash_vocher(this.id)"/>
-	<?php
-	}
 	
-	$voucher_comp_list1 = $con->query("SELECT vp.id as vo_id,vp.code as vou_code,vp.voucher_category_code as voc_cat_code,vp.name as vouc_purpo_name,vp.code as vou_pur_code FROM accounts_voucher_purpose vp where vp.voucher_category_code='$v_code[$i]' AND code NOT IN('PUR-001','PUR-007','PUR-006','PUR-012','PUR-021','PUR-022') and voucher_category_code!='CAT-005'");
+	$voucher_comp_list1 = $con->query("SELECT vp.id as vo_id,vp.code as vou_code,vp.voucher_category_code as voc_cat_code,vp.name as vouc_purpo_name,vp.code as vou_pur_code FROM accounts_voucher_purpose vp where vp.voucher_category_code='$v_code[$i]' and vp.voucher_category_code not in ('CAT-001','CAT-002')");
+	
 	while($vouch_det1=$voucher_comp_list1->fetch(PDO::FETCH_ASSOC))
 	{ 
-	?>
-	
-	<ul>
-	<input type="hidden" name="vouc_cat" id="vouc_cat" value="<?php echo $vouch_det1['voc_cat_code'] ; ?>">
-	<input type="button" name="vouc_purpo_name" class="btn btn-primary btn-sm" id="<?php echo $vouch_det1['vo_id'] ; ?>" 
-	value="<?php echo $vouch_det1['vouc_purpo_name'];?>" onclick="voucher_purp(this.id)"/>
-	</ul>
+		?>
+		
+		<ul>
+		<input type="hidden" name="vouc_cat" id="vouc_cat" value="<?php echo $vouch_det1['voc_cat_code'] ; ?>">
+		<input type="button" name="vouc_purpo_name" class="btn btn-primary btn-sm" id="<?php echo $vouch_det1['vo_id'] ; ?>" 
+		value="<?php echo $vouch_det1['vouc_purpo_name'];?>" onclick="voucher_purp(this.id)"/>
+		</ul>
 
-	<?php 
+		<?php 
 	}
 	
 	echo '</td>';

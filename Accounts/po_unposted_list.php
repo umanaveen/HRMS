@@ -12,17 +12,19 @@ $userrole=$_SESSION['userrole'];
     <table id="example1" class="table table-bordered table-striped">
 		<thead>
 		<th>#</th>
+		<th>category_code</th>
+		<th>purpose_code</th>
 		<th>approve_date</th>
 		<th>enquiry_id</th>
-		<th>quote_cost_sheet_no</th>
+		<th>work_order_no</th>
 		<th>status</th>
 		<th>Action</th>
 		</thead>		
 		<tbody>
 		<?php
-
+		
 		$cnt=1;
-		$quote=$con->query("select id, approve_date, enquiry_id, quote_cost_sheet_no, status from  po_approve_unposted_data");
+		$quote=$con->query("select * from  po_approve_unposted_data");
 
 		while($quote_list = $quote->fetch(PDO::FETCH_ASSOC))
 		{
@@ -30,9 +32,11 @@ $userrole=$_SESSION['userrole'];
 			?>
 			<tr>
 			<td><?php echo $cnt;?>.</td>
+			<td><?php echo $quote_list['voucher_category_code']; ?></td>
+			<td><?php echo $quote_list['voucher_purpose_code']; ?></td>
 			<td><?php echo $quote_list['approve_date']; ?></td>
 			<td><?php echo $quote_list['enquiry_id']; ?></td>
-			<td><?php echo $quote_list['quote_cost_sheet_no']; ?></td>
+			<td><?php echo $quote_list['work_order_no']; ?></td>
 			<td>
 
 			<?php if($quote_list['status']==1)
@@ -47,10 +51,6 @@ $userrole=$_SESSION['userrole'];
 	  
 		</td>
 		<td>
-		<button class="btn btn-info" data-id="<?php echo $quote_list['id']; ?>" onclick="po_status_view(<?php echo $quote_list['id']; ?>)">
-		<i class="fa fa-eye">  View</i>
-		</button>
-		
 		<button class="btn btn-info" data-id="<?php echo $quote_list['id']; ?>" onclick="po_unposted_post(<?php echo $quote_list['enquiry_id']; ?>)" value="">
 		<i class="fa fa-pen">  Post</i>
 		</button>
@@ -66,18 +66,6 @@ $userrole=$_SESSION['userrole'];
 </div>
 
 <script>
-function po_status_view(v)
-{
-	$.ajax({
-	type:"POST",	
-	url:"HRMS/BusinessProcess/po_approval/po_approve.php?id="+v,
-	success:function(data)
-	{
-		$("#main_content").html(data);
-	}
-	})
-}
-
 function po_unposted_post(v)
 {
 	alert(v);
