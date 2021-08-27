@@ -2,7 +2,7 @@
 include("connect.php");
 include("user.php");
 
-
+//testing
 $username=$_SESSION['username'];
 ?>
 <!DOCTYPE html>
