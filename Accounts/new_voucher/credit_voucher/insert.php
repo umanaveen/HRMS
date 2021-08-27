@@ -8,118 +8,97 @@ require('../../../connect.php');
 	<center>Credit Voucher</center>
 	</thead>
 	<tr>
-		<td>Bank</td>
-		<td>
-			<select class="form-control select2" id="bank_code" name="bank_code">
-			<option value="">Choose Bank</option>
-			<?php
-			$ledger_sql = $con->query("SELECT code,name FROM accounts_bank");
-			while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
-			{
+	<td>Bank</td>
+	<td>
+	<select class="form-control select2" id="bank_code" name="bank_code">
+	<option value="">Choose Bank</option>
+	<?php
+	$ledger_sql = $con->query("SELECT code,name FROM accounts_bank");
+	while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
+	{
+		?>
+		<option value="<?php echo $ledger_res['code'];?>"><?php echo $ledger_res['name'];?></option>
+		<?php
+	}
+	?>	
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<td>Date</td>
+	<td>
+	<div class="input-group">
+		<div id="credit_vouch_date" class="input-append date">
+		<div class="input-group" style="width:100%;">
+		<input type="Date" class="add-on form-control" id="voucher_date" name="voucher_date" title="Date" value="<?php echo date("Y-m-d"); ?>" />			
+		</div>
+		<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+		</div>
+	</div>
+	</td>
+	</tr>
+	<tr>
+	<td>Ledger</td>
+	<td>
+		<select class="form-control select2" id="ledger_code" name="ledger_code">
+		<option value="">Choose Ledger</option>
+		<?php
+		$ledger_sql = $con->query("SELECT code,name FROM accounts_ledger order by name asc");
+		while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
+		{
 			?>
 			<option value="<?php echo $ledger_res['code'];?>"><?php echo $ledger_res['name'];?></option>
 			<?php
-
-			}	
-			?>	
-			</select>
-		</td>
+		}	
+		?>	
+		</select>
+	</td>
 	</tr>
 	<tr>
-		<td>Date</td>
-		<td>
-			<div class="input-group">
-				<div id="credit_vouch_date" class="input-append date">
-				<div class="input-group" style="width:100%;">
-				<input type="Date" class="add-on form-control" id="voucher_date" name="voucher_date" title="Date" value="<?php echo date("Y-m-d"); ?>" />			
-				</div>
-				<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-				</div>
-			</div>
-		</td>
+	<td>Customer </td>
+	<td>
+	<select class="form-control select2" id="customer_code" name="customer_code">
+	<option value="">Choose Customer</option>
+	<?php
+	$ledger_sql = $con->query("SELECT id,org_name FROM client_master order by org_name asc");
+	while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
+	{
+		?>
+		<option value="<?php echo $ledger_res['id'];?>"><?php echo $ledger_res['org_name'];?></option>
+		<?php
+	}	
+	?>	
+	</select>
+	</td>
 	</tr>
 	<tr>
-		<td>Ledger</td>
-		<td>
-			<select class="form-control select2" id="ledger_code" name="ledger_code">
-			<option value="">Choose Ledger</option>
+	<td>Cost Center</td>
+	<td>
+		<select class="form-control select2" id="cost_center" name="cost_center">
+		<option value="">Choose Cost Center</option>
+		<?php
+		$ledger_sql = $con->query("SELECT id,org_name FROM client_master order by org_name asc");
+		while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
+		{
+			?>
+			<option value="<?php echo $ledger_res['id'];?>"><?php echo $ledger_res['org_name'];?></option>
 			<?php
-			$ledger_sql = $con->query("SELECT code,name FROM accounts_ledger order by name asc");
-			while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
-			{
-				?>
-				<option value="<?php echo $ledger_res['code'];?>"><?php echo $ledger_res['name'];?></option>
-				<?php
-			}	
-			?>	
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>Customer </td>
-		<td>
-			<select class="form-control select2" id="customer_code" name="customer_code" onchange="get_workorder()">
-			<option value="">Choose Customer</option>
-			<?php
-			$ledger_sql = $con->query("SELECT id,org_name FROM client_master order by org_name asc");
-			while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
-			{
-				?>
-				<option value="<?php echo $ledger_res['id'];?>"><?php echo $ledger_res['org_name'];?></option>
-				<?php
-			}	
-			?>	
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>Cost Center</td>
-		<td>
-			<select class="form-control select2" id="cost_center" name="cost_center">
-			<option value="">Choose Cost Center</option>
-			<?php
-			$ledger_sql = $con->query("SELECT id,org_name FROM client_master order by org_name asc");
-			while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
-			{
-				?>
-				<option value="<?php echo $ledger_res['id'];?>"><?php echo $ledger_res['org_name'];?></option>
-				<?php
-			}	
-			?>	
-			</select>
-		</td>
+		}	
+		?>	
+		</select>
+	</td>
 	</tr>
 	<tr>
 		<td>Work Order</td>
 		<td>
-			<select class="form-control select2" id="workorder_number" name="workorder_number" onchange="">
-			<option value="">Choose Work Order</option>
-			<?php
-			$ledger_sql = $con->query("SELECT Po_id,enquiry_id,CONCAT(prefix_code,workorder_number) as workorder_number FROM po_upload");
-			while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
-			{
-				?>
-				<option value="<?php echo $ledger_res['enquiry_id'];?>"><?php echo $ledger_res['workorder_number'];?></option>
-				<?php
-			}	
-			?>	
-			</select>
+		<select class="form-control select2" id="work_order_code" name="work_order_code">
+		</select>
 		</td>
 	</tr>
 	<tr>
 		<td>Period</td>
 		<td>
-			<select class="form-control select2" id="ledger_code" name="ledger_code">
-			<option value="">Choose Period</option>
-			<?php
-			$ledger_sql = $con->query("SELECT code,name FROM accounts_ledger order by name asc");
-			while($ledger_res=$ledger_sql->fetch(PDO::FETCH_ASSOC))
-			{
-				?>
-				<option value="<?php echo $ledger_res['code'];?>"><?php echo $ledger_res['name'];?></option>
-				<?php
-			}	
-			?>	
+			<select class="form-control" id="period-dropdown">
 			</select>
 		</td>
 	</tr>
@@ -148,24 +127,75 @@ require('../../../connect.php');
 	<tr>
 		<td></td>
 		<td>
-			<input type="button" name="submit" onclick="credit()"  value="Save" class="btn btn-primary btn-sm" />
+		<input type="button" name="submit" onclick="credit()"  value="Save" class="btn btn-primary btn-sm"/>
 		</td>
 	</tr>
 </table>
 </form>
 
 <script>
-$(document).ready(function(){	
-		$('#credit_vouch_date').datetimepicker({
-		format: "dd-MM-yyyy"
+
+
+$(document).ready(function() {
+	
+		$('#customer_code').on('change', function() {
+		var customer_id = this.value;
+		
+		alert(customer_id);
+		$.ajax({
+		url: "Accounts/new_voucher/credit_voucher/workorder-by-customer.php?customer_id="+customer_id,
+		type: "POST",
+		cache: false,
+		success: function(result){
+		$("#work_order_code").html(result); 
+		}
 		});
-	});
+		});
 
-function get_workorder(org_id)
-{
-	alert(org_id);
-}
+		$('#work_order_code').on('click', function() {			
+			
+		 var cost_sheet_entry_id = this.value;
+		
+		$.ajax({
+		url: "Accounts/new_voucher/credit_voucher/period_value-by-workorder.php?cost_sheet_entry_id="+cost_sheet_entry_id,
+		type: "POST",
+		cache: false,
+		success: function(result){
+		$("#period-dropdown").html(result);
+		}
+		});
 
+		});
+});
+
+
+	$(document).ready(function(){	
+			$('#credit_vouch_date').datetimepicker({
+			format: "dd-MM-yyyy"
+			});
+		});
+	
+	function get_work_order()
+	{
+		alert('ok');
+		/*
+		$('#work_order_code').on('change', function() {
+		var po_id = this.value;
+		
+		alert(po_id);
+		$.ajax({
+		url: "Accounts/new_voucher/credit_voucher/period_value-by-workorder.php?po_id="+po_id,
+		type: "POST",
+		cache: false,
+		success: function(result){
+		$("#period-dropdown").html(result); 
+		}
+		});
+		}); 
+		*/
+	}
+	
+	
 function credit()
 {
 	var id=0;
