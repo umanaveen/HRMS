@@ -20,7 +20,8 @@ $userrole=$_SESSION['userrole'];
 		  <th>Id</th>
 		  <!--th>Company Name</th-->
 		  <th>Name</th>
-		  <th>Department</th>
+		  <th>Scheduled Date</th>
+		  <!--th>Department</th-->
 		  <th>Position</th>
 		  <th>Phone</th>
 		  <th>Mail</th>
@@ -30,7 +31,7 @@ $userrole=$_SESSION['userrole'];
       </thead>
       <tbody>
       <?php
-      $emp_sql=$con->query("SELECT *,c.id as cid,c.status as status FROM `candidate_form_details` c left join company_master cm on c.company_name=cm.id left join designation_master d on c.position=d.id left join z_department_master z on c.department=z.id where c.status=2 or c.status=3 or c.status=4 or c.status=6 or c.status=20 or c.status=5 or c.status=7 or c.status=8 or c.status=9 or c.status=13 or c.status=14 or c.status=15 or c.status=16 or c.status=17 or c.status=18 or c.status=19 or c.status=20 or c.status=21 or c.status=22 or c.status=23 or c.status=24 or c.status=30 or c.status=35 or c.status=37 order by c.id desc");
+      $emp_sql=$con->query("SELECT *,c.id as cid,c.status as status FROM `candidate_form_details` c left join company_master cm on c.company_name=cm.id left join designation_master d on c.position=d.id left join z_department_master z on c.department=z.id join interview_schedule_detail i on c.resource_id=i.resource_id  where c.status=2 or c.status=3 or c.status=4 or c.status=6 or c.status=20 or c.status=5 or c.status=7 or c.status=8 or c.status=9 or c.status=13 or c.status=14 or c.status=15 or c.status=16 or c.status=17 or c.status=18 or c.status=19 or c.status=20 or c.status=21 or c.status=22 or c.status=23  or c.status=30 or c.status=35 or c.status=37 order by c.id desc");
       $i=1;
       while($emp_res = $emp_sql->fetch(PDO::FETCH_ASSOC))
       {
@@ -48,7 +49,8 @@ $userrole=$_SESSION['userrole'];
 		  <!--td><!?php echo $emp_res['companyname']; ?></td-->
 		  <td><?php echo $emp_res['first_name']." ".$emp_res['last_name']; ?></td>
 		 
-		  <td><?php echo $emp_res['dept_name']; ?></td>
+		  <td><?php echo $emp_res['interview_date']; ?></td>
+		  <!--td><!?php echo $emp_res['dept_name']; ?></td-->
 		  <td><?php echo $emp_res['designation_name']; ?></td>
 		  <td><?php echo $emp_res['phone']; ?></td>
 		  <td><?php echo $emp_res['mail']; ?></td>

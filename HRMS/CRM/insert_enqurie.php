@@ -29,7 +29,7 @@ $employee1=$_REQUEST['employees_id'];
 
 
 if($Client_type==2){
-$sql11=$con->query("insert into Enquiry(`Call_type`, `date`, `Client_type`, `consultant`,`Company_name`, `Location`, `Address`, `Client`, `Designation`, `Mobile`, `mail`, `Product`,`Feedback`, `Follup`,`Department`, `employee`,  `created_by`, `created_on`) values('$Call_type','$date','$Client_type','$consl_name','$Company_name','$Location','$Address','$Client','$Designation','$Number','$mail','$Product','$Feedback','$Follup','$Department','$employee','$candidateid',now())"); 
+$sql11=$con->query("insert into enquiry(`Call_type`, `date`, `Client_type`, `consultant`,`Company_name`, `Location`, `Address`, `Client`, `Designation`, `Mobile`, `mail`, `Product`,`Feedback`, `Follup`,`Department`, `employee`,  `created_by`, `created_on`) values('$Call_type','$date','$Client_type','$consl_name','$Company_name','$Location','$Address','$Client','$Designation','$Number','$mail','$Product','$Feedback','$Follup','$Department','$employee','$candidateid',now())"); 
 
 /*  echo "insert into Enquiry(`Call_type`, `date`, `Client_type`, `Company_name`, `Location`, `Address`, `Client`, `Designation`, `Mobile`, `mail`, `Product`,`list`,`Feedback`, `Follup`, `companys`, `Department`, `employee`,  `created_by`, `created_on`) values('$Call_type','$date','$Client_type','$Company_name','$Location','$Address','$Client','$Designation','$Number','$mail','$Product','$list','$Feedback','$Follup','$companys','$Department','$employee','1',now())"; */
 } 

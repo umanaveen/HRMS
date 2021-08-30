@@ -3,9 +3,9 @@ require '../../connect.php';
 include("../../user.php");
 $id=$_REQUEST['id'];
 $stmt = $con->prepare("SELECT enquiry.id as enquiry_id,enquiry.status as enquiry_status,enquiry.mail as enquiry_mailid,enquiry.*,calls_master.*,z_department_master.*,candidate_form_details.*  FROM `enquiry`
-	   INNER JOIN calls_master ON enquiry.Call_type=calls_master.id
-	  INNER join z_department_master ON enquiry.Department=z_department_master.id
-	  INNER JOIN candidate_form_details ON enquiry.employee=candidate_form_details.id
+	   left JOIN calls_master ON enquiry.Call_type=calls_master.id
+	  left join z_department_master ON enquiry.Department=z_department_master.id
+	  left JOIN candidate_form_details ON enquiry.employee=candidate_form_details.id
 where enquiry.id='$id'"); 
 
 $stmt->execute(); 

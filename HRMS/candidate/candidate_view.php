@@ -396,9 +396,7 @@ while($rows11 = $sqll->fetch(PDO::FETCH_ASSOC))
 {
 	
 		?>
-	  <tr>
-	  
-	 
+<tr> 
 <td>MD NAME:</td>
 <td colspan="2"><input type="text" class="form-control" id="head_name" name="head_name" value="<?php echo  $rows11['ename']; ?>" readonly></td>
 </tr>
@@ -406,7 +404,8 @@ while($rows11 = $sqll->fetch(PDO::FETCH_ASSOC))
 <?php
 }
 ?>
-<?php if($fet['candidate_status']=='16'){
+<?php if($fet['candidate_status']=='16')
+{
 	?>
  <table class="table table-bordered" id="recruiter_page">
 <h3><center>MD Round Feedback Details</center></h3>
@@ -417,7 +416,6 @@ while($rows11 = $sqll->fetch(PDO::FETCH_ASSOC))
 $sql=$con->query("SELECT s.emp_name as ename,c.candid_id,i.name as depname,c.*,s.*,i.*,d.*,r.* FROM candidate_round_details c 
 join staff_master s on c.person_id=s.id 
 join interview_rounds i on c.round_id=i.id 
-
 JOIN domain_entries_md d ON c.candid_id=d.candids_id
 join interview_round_name r on d.round_name_id=r.id where c.candid_id='$cid' and c.status='16'");
 
@@ -425,10 +423,8 @@ join interview_round_name r on d.round_name_id=r.id where c.candid_id='$cid' and
 $cnt=1;
 $k=0;
 while($rows2 = $sql->fetch(PDO::FETCH_ASSOC))
-
 {
-	
-		?>
+	?>
 <tr>
 
 <td><?php echo  $rows2['Sec_name']; ?></td>

@@ -12,7 +12,7 @@ include("../../user.php");
 	<div id="table_view">
 <div  class="card card-primary">
               <div class="card-header">
-                            <h1 class="page-header">Candidate List</h1>
+                            <h1 class="page-header">Document List</h1>
                         </div>
 						
 						
@@ -46,7 +46,7 @@ include("../../user.php");
       </thead>
       <tbody>
       <?php
-      $emp_sql=$con->query("SELECT *,c.status as status,c.id as id FROM candidate_form_details c join designation_master d on c.final_designation=d.id where c.status=18 or c.status=19 or c.status=20 or c.status=21 or c.status=22 or c.status=23 or c.status=24 ");
+      $emp_sql=$con->query("SELECT *,c.status as status,c.id as id FROM candidate_form_details c join designation_master d on c.final_designation=d.id where c.status=18 or c.status=19 or c.status=20 or c.status=21 or c.status=22 or c.status=23 or c.status=24 order by c.id desc");
       $i=1;
       while($emp_res = $emp_sql->fetch(PDO::FETCH_ASSOC))
       {
