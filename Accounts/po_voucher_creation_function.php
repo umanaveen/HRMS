@@ -6,7 +6,7 @@
 	$userrole=$_SESSION['userrole'];
 	$user_id=1;	
 	
-	// required headers
+	//required headers
 	header("Access-Control-Allow-Origin: *");
 	header("Access-Control-Allow-Headers: access");
 	header("Access-Control-Allow-Methods: GET");
@@ -124,7 +124,6 @@
 			print_r($narration);			
 			echo $ledger_code[$i];			
 			*/
-					
 			
 			$memrowsql=$con->query("SELECT * FROM account_entry order by id desc limit 0,1");
 			$check = $memrowsql->fetchColumn();
